@@ -40,9 +40,7 @@ fi
 NGINX_CONF="/etc/nginx/nginx.conf"
 echo "Customising Nginx log format to include client IP, request time, upstream response time..."
 
-NEW_LOG_FORMAT="    log_format  main  '\\\$http_x_forwarded_for - \\\$remote_addr - \\\$remote_user [\\\$time_local] \"\\\$request\" ' \\
-                      '\\\$status \\\$body_bytes_sent \"\\\$http_referer\"' \\
-                      '\"\\\$http_user_agent\"' 'rt=\"\\\$request_time\"' 'ut=\"\\\$upstream_response_time\"';"
+NEW_LOG_FORMAT="    log_format  main  '\\\$http_x_forwarded_for - \\\$remote_addr - \\\$remote_user [\\\$time_local] \"\\\$request\" \\\$status \\\$body_bytes_sent \"\\\$http_referer\" \"\\\$http_user_agent\" rt=\"\\\$request_time\" ut=\"\\\$upstream_response_time\"';"
 
 # A search pattern to find the existing 'log_format main' directive.
 SEARCH_PATTERN="^[[:space:]]*log_format[[:space:]]\+main"
