@@ -10,8 +10,8 @@ REPO_BRANCH="main"
 
 SCRIPTS_TO_RUN=(
   "setup.sh"
-  "logs_scheduler.sh",
-  "cloudwatch_setup.sh",
+  "logs_scheduler.sh"
+  "cloudwatch_setup.sh"
   "auto_updates.sh"
 )
 

@@ -68,13 +68,13 @@ echo "A backup of the original has been created at ${NGINX_CONF}.bak"
 echo "Testing new Nginx configuration syntax..."
 if sudo nginx -t; then
     echo "Configuration test successful."
-    
+
     echo "Reloading Nginx to apply changes..."
     if ! sudo systemctl reload nginx; then
         echo "Nginx is not running, starting Nginx instead..."
         sudo systemctl start nginx
     fi
-    
+
     echo "Nginx has been reloaded or started successfully."
 else
     # If the test fails, restore the backup to prevent downtime.
