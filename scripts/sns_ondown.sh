@@ -41,16 +41,16 @@ aws sns subscribe \
 
 echo "IMPORTANT: A confirmation email has been sent to ${EMAIL_ADDRESS}. You must click the link in that email to confirm the subscription."
 
-echo "Setting up CloudWatch alarm named '${ALARM_NAME}' for instance '${INSTANCE_ID}'..."
+echo "Setting up CloudWatch alarm named '${ALARM_NAME}' for CPU usage on instance '${INSTANCE_ID}'..."
 aws cloudwatch put-metric-alarm \
   --alarm-name "${ALARM_NAME}" \
-  --alarm-description "Alarm when EC2 instance ${INSTANCE_ID} status checks fail for 2 consecutive minutes" \
-  --metric-name StatusCheckFailed \
+  --alarm-description "Alarm when EC2 instance ${INSTANCE_ID} CPU usage is 70% or higher for 2 consecutive minutes" \
+  --metric-name CPUUtilization \
   --namespace AWS/EC2 \
-  --statistic Maximum \
+  --statistic Average \
   --period 60 \
   --evaluation-periods 2 \
-  --threshold 1 \
+  --threshold 70 \
   --comparison-operator GreaterThanOrEqualToThreshold \
   --dimensions "Name=InstanceId,Value=${INSTANCE_ID}" \
   --alarm-actions "${TOPIC_ARN}" \
