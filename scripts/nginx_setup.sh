@@ -2,7 +2,7 @@
 
 set -e
 
-echo "---Nginx server setup---"
+echo "---SSM Agent setup---"
 
 #---SSM Agent installation---
 echo "Checking if SSM Agent is installed..."
@@ -23,6 +23,8 @@ else
 fi
 
 #---Nginx installation---
+echo "---Nginx server setup---"
+
 echo "Checking if Nginx is installed..."
 if ! command -v nginx &> /dev/null; then
     echo "Nginx not found. Installing..."

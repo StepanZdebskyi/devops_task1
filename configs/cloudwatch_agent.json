@@ -8,7 +8,6 @@
       "cpu": {
         "measurement": [
           "cpu_usage_idle",
-          "cpu_usage_iowait",
           "cpu_usage_user",
           "cpu_usage_system"
         ],
@@ -41,9 +40,11 @@
       "files": {
         "collect_list": [
           {
-            "file_path": "/var/log/messages",
             "log_group_name": "stepan-ec2-system-logs",
             "log_stream_name": "{instance_id}",
+            "journald": {
+                 "systemd_unit": "nginx.service"
+            },
             "timezone": "UTC"
           },
           {

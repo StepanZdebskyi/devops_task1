@@ -9,10 +9,11 @@ REPO_BRANCH="main"
 #Scripts list to run
 
 SCRIPTS_TO_RUN=(
-  "setup.sh"
+  "nginx_setup.sh"
   "logs_scheduler.sh"
   "cloudwatch_setup.sh"
   "auto_updates.sh"
+  "sns_ondown.sh"
 )
 
 #Where to clone the repo
