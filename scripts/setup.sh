@@ -40,7 +40,7 @@ fi
 NGINX_CONF="/etc/nginx/nginx.conf"
 echo "Customising Nginx log format to include client IP, request time, upstream response time..."
 
-NEW_LOG_FORMAT="    log_format  main  '\\\$http_x_forwarded_for - \\\$remote_addr - \\\$remote_user [\\\$time_local] \"\\\$request\" \\\$status \\\$body_bytes_sent \"\\\$http_referer\" \"\\\$http_user_agent\" rt=\"\\\$request_time\" ut=\"\\\$upstream_response_time\"';"
+NEW_LOG_FORMAT="    log_format  main  '\\\$http_x_forwarded_for - \\\$remote_addr - \\\$remote_user [\\\$time_local] \"\\\$request\"' '\\\$status \\\$body_bytes_sent \"\\\$http_referer\"' '\"\\\$http_user_agent\"' 'rt=\"\\\$request_time\"' 'ut=\"\\\$upstream_response_time\"';"
 
 # A search pattern to find the existing 'log_format main' directive.
 SEARCH_PATTERN="^[[:space:]]*log_format[[:space:]]\+main"
@@ -59,7 +59,7 @@ if ! grep -q "${SEARCH_PATTERN}" "${NGINX_CONF}"; then
 fi
 
 echo "Found existing 'log_format main'. Replacing it with the new custom format."
-sudo sed -i.bak "/${SEARCH_PATTERN}/c\\${NEW_LOG_FORMAT}" "${NGINX_CONF}"
+sudo sed -i.bak "/${SEARCH_PATTERN}/,/;/c\\${NEW_LOG_FORMAT}" "${NGINX_CONF}" #it should search all three lines of config record until it finds ";" and replace them with the new format
 echo "Nginx configuration file updated."
 echo "A backup of the original has been created at ${NGINX_CONF}.bak"
 

@@ -10,7 +10,9 @@ REPO_BRANCH="main"
 
 SCRIPTS_TO_RUN=(
   "setup.sh"
-  "s3_bucket_logs.sh"
+  "logs_scheduler.sh",
+  "cloudwatch_setup.sh",
+  "auto_updates.sh"
 )
 
 #Where to clone the repo
@@ -56,7 +58,7 @@ for script in "${SCRIPTS_TO_RUN[@]}"; do
 
     if [ -f "$SCRIPT_PATH" ]; then
         echo "Making script $script executable and running it..."
-        chmod +x "$SCRIPT_PATH"
+        chmod 700 "$SCRIPT_PATH"
         "$SCRIPT_PATH"
         echo "Script $script executed successfully."
     else
