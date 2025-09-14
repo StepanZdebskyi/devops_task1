@@ -2,6 +2,8 @@
 
 set -e
 
+echo "---Nginx server setup---"
+
 #---SSM Agent installation---
 echo "Checking if SSM Agent is installed..."
 if ! command -v amazon-ssm-agent &> /dev/null; then
